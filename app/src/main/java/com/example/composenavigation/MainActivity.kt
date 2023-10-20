@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.composenavigation.ui.theme.ComposeNavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,96 +35,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeNavigationTheme {
-                val language = listOf(
-                    "Java",
-                    "Kotlin",
-                    "Python",
-                    "Java",
-                    "Kotlin",
-                    "Python",
-                    "Java",
-                    "Kotlin",
-                    "Python",
-                    "Java",
-                    "Kotlin",
-                    "Python",
-                )
-                MyApp(
-                    modifier = Modifier,
-                    language
-                )
+                val navController = rememberNavController()
+                Nav(navController)
             }
-        }
-    }
-}
-
-@Composable
-fun MyApp(modifier: Modifier = Modifier, language: List<String>) {
-    Column(modifier.fillMaxSize()) {
-        LazyRow() {
-            items(items = language) { item ->
-                RowItem(modifier = modifier, name = item)
-
-            }
-        }
-        LazyColumn() {
-            items(items = language) { item ->
-                ColumItem(modifier = modifier, name = item)
-
-            }
-        }
-
-    }
-}
-
-
-@Composable
-fun ColumItem(modifier: Modifier, name: String) {
-
-    Card(
-        modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .aspectRatio(3f),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(10.dp)
-    ) {
-        Box(
-            modifier
-                .padding(10.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        )
-        {
-            Text(text = name, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-        }
-    }
-}
-
-@Composable
-fun RowItem(modifier: Modifier, name: String) {
-    Card(
-        modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .height(100.dp)
-            .aspectRatio(1.5f),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(10.dp)
-    ) {
-        Box(
-            modifier
-                .padding(10.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        )
-        {
-            Text(text = name, fontSize = 22.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
